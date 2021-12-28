@@ -1,7 +1,5 @@
 #!/usr/bin/with-contenv bashio
 
-CONFIG_PATH=/data/options.json
-
 export MAC="$(bashio::config 'mac')"
 export CONFIG_PATH="$(bashio::config 'config_path')"
 export DEBUG="$(bashio::config 'debug')"
@@ -19,6 +17,12 @@ else
     echo "$CONFIG_PATH created."
 fi
 
+rm -rf /opt/hue-emulator/config
+ln -s $CONFIG_PATH /opt/hue-emulator/config
+
+echo "Configuration contents:"
+
+ls -la /opt/hue-emulator/config
 
 echo "Your Architecture is $BUILD_ARCHI"
 
